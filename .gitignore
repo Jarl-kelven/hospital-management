@@ -44,3 +44,9 @@ next-env.d.ts
 
 # doctor photos uploaded through the admin form (keep the repo clean)
 /public/uploads
+
+# AI tooling
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
