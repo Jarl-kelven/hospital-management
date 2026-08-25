@@ -11,6 +11,20 @@ that makes it, because this project doubles as something to learn from.
 
 ## What it does
 
+### ✨ Features
+
+- 🔐 Hand-rolled authentication — bcrypt passwords, SHA-256 hashed session tokens, no auth library
+- 🛡️ Role-based access (`USER` / `ADMIN`) re-checked inside every Server Action, not just the layout
+- 📅 Appointment booking — pick a doctor, date and time, then track the status the clinic sets
+- 🩺 Patient medical profile — date of birth, emergency contact, blood group, allergies and notes
+- 👨‍⚕️ Doctor management with photo upload, validated by MIME type and size
+- 📊 Admin dashboard — user, doctor, appointment and enquiry counts in a single parallel query
+- 📬 Contact form that saves to the database *first* and emails via Resend second, so no enquiry is lost
+- 📥 Admin inbox with an unread count and a badge when an email fails to send
+- ⚡ Server Components and Server Actions throughout — no `app/api` layer, and the footer ships zero JavaScript
+- 📱 Responsive across breakpoints, with a mobile nav in the header
+- 🎨 Tailwind v4 theming through `@theme` tokens, with no config file
+
 **Anyone** can browse the marketing site, look through the doctors pulled from
 the database, and send an enquiry through the contact form. The enquiry is saved
 to the database first and emailed to the admin second, so a message is never
@@ -40,7 +54,7 @@ status, and an inbox of contact-form enquiries with an unread count.
 | Styling | Tailwind CSS v4 | Theme tokens in `app/globals.css`, no separate config file |
 | Email | Resend | One function call, no SMTP credentials to manage |
 
-## Running it locally
+## 🚀 Getting started
 
 You'll need Node 20 or newer and a Neon database (the free tier is plenty).
 
