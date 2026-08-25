@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/app/generated/prisma
+
+# doctor photos uploaded through the admin form (keep the repo clean)
+/public/uploads

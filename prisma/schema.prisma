@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Note: in Prisma 7 the connection URL lives in prisma.config.ts
+// (datasource.url), not here — that's why this block only sets a provider.
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(USER)
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  profile      UserProfile?
+  sessions     Session[]
+  appointments Appointment[] @relation("PatientAppointments")
+}
+
+// One profile per user, holding the details they fill in on their dashboard.
+// Every field is optional so a brand-new account can exist without a profile,
+// and the user can save the form a bit at a time.
+model UserProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // --- Basics ---
+  // We store the date of birth rather than the age, because an age saved as a
+  // number would slowly go out of date. Age is calculated when we display it.
+  dateOfBirth DateTime?
+  gender      Gender?
+  phone       String?
+  address     String?
+
+  // --- Emergency contact ---
+  emergencyName  String?
+  emergencyPhone String?
+
+  // --- A few medical details (easy to extend later) ---
+  bloodGroup String?
+  allergies  String?
+  notes      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tokenHash String   @unique
+  expiresAt DateTime
+
+  createdAt DateTime @default(now())
+}
+
+// Mirrors the old `DoctorPreview` type from data/doctors.ts, so the doctor
+// cards keep working after we switch them from the static array to the database.
+model Doctor {
+  id             String @id @default(cuid())
+  name           String
+  specialization String
+  hospital       String
+  photoUrl       String // e.g. "/uploads/doctors/abc.png" or "/images/doc1.png"
+
+  // Ratings and patient count. Defaults mean the admin form can leave them
+  // blank for a new doctor without breaking anything.
+  avgRating     Float @default(0)
+  totalRating   Int   @default(0)
+  totalPatients Int   @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  patientId   String
+  doctorId    String
+  scheduledAt DateTime
+  status      AppointmentStatus @default(PENDING)
+  reason      String?
+
+  createdAt   DateTime @default(now())
+
+  patient     User   @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+  doctor      Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([doctorId])
+  @@index([patientId])
+  @@index([scheduledAt])
+}
+
+// An enquiry sent through the public contact form.
+//
+// There's no relation to User on purpose: anyone can use the contact form,
+// logged in or not, so we just store whatever name and email they typed.
+// Saving the message means an enquiry survives even if the email fails to send.
+model ContactMessage {
+  id      String  @id @default(cuid())
+  name    String
+  email   String
+  phone   String?
+  subject String
+  message String
+
+  // Has the admin dealt with it yet? Used for the unread count.
+  isRead  Boolean @default(false)
+
+  // Did the email to the admin actually go out? Handy for spotting a broken
+  // API key — the message is safe in the database either way.
+  emailSent Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+  // Sorting the inbox by newest first is the only query we run, so an index on
+  // createdAt keeps it fast once there are a lot of messages.
+  @@index([createdAt])
+}

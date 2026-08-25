@@ -1,26 +1,133 @@
+/* src/app/globals.css */
 @import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/pagination";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* -----------------------------
+   Tailwind v4 theme tokens
+   These names must match your utility usage:
+   e.g. bg-primaryColor, text-primaryLight, etc.
+   ----------------------------- */
+@theme {
+  --color-primaryColor: #c80040;
+  --color-primaryLight: #ff85ab;
+
+  /*
+    Hand the font from app/layout.tsx to Tailwind.
+
+    `--font-poppins` is created by next/font on the <html> element. Naming it as
+    `--font-sans` here makes the `font-sans` utility mean our font instead of the
+    system stack.
+
+    That one line is enough to change every element on the page, and it's worth
+    knowing why. Tailwind's own theme declares
+    `--default-font-family: --theme(--font-sans, initial)`, and its reset applies
+    `--default-font-family` to <html>. So by setting `--font-sans` we've already
+    changed the page default for free. The second line below just states that
+    explicitly rather than relying on Tailwind's internals — it's belt and
+    braces, not a requirement.
+
+    The trailing fallbacks matter because Poppins is fetched over the network:
+    they're what the browser renders in the moment before it arrives.
+  */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --default-font-family: var(--font-sans);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* -----------------------------
+   Custom classes from your old index.css
+   Put them in @layer so Tailwind doesn't purge/reorder weirdly.
+   ----------------------------- */
+@layer components {
+  .container {
+    @apply mx-auto w-11/12 my-14 px-7;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .btn {
+    @apply text-white text-center font-bold border rounded-full py-2 px-4 bg-primaryColor my-5 sm:text-base text-xs;
+  }
+
+  .login {
+    @apply w-[50%] rounded-md text-sm;
+  }
+
+  .link {
+    @apply border-[3px] mt-3 border-gray-500 rounded-full p-4 cursor-pointer;
+  }
+
+  .feature-container {
+    @apply flex flex-col mt-14 justify-center items-center text-center lg:basis-2/6;
+  }
+
+  .share-icon {
+    @apply border rounded-full sm:p-4 p-2 text-gray-800 border-gray-800 hover:bg-gray-800 hover:text-white cursor-pointer mt-2;
+  }
+
+  .share-icon-pink {
+    @apply border hover:border-primaryLight rounded-full sm:p-3 p-2 text-gray-800 border-gray-800 hover:bg-primaryLight hover:text-primaryColor cursor-pointer;
+  }
+
+  .heading-1 {
+    @apply font-bold text-gray-800 sm:text-4xl text-3xl;
+  }
+
+  .list {
+    @apply my-2 sm:text-base text-sm;
+  }
+
+  .foot-head {
+    @apply text-gray-200 font-bold text-lg border-b-4 inline-block border-b-primaryColor py-1 lg:text-xl;
+  }
+
+  .foot-list li {
+    @apply hover:text-gray-300 my-2 cursor-pointer text-xs w-max;
+  }
+
+  .social-list li {
+    @apply mx-2 cursor-pointer hover:text-gray-300 sm:text-xl text-sm;
+  }
+
+  .input-field {
+    @apply w-full bg-[#f8d5e0] p-3 rounded-t-md border-b-4 text-gray-800 border-b-primaryColor placeholder:text-primaryColor placeholder:text-xs placeholder:opacity-70 outline-none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* -----------------------------
+   Old App.css global rules
+   Keep them global (not Tailwind utilities)
+   ----------------------------- */
+
+/*
+  The .sticky-header, .hamburger, .navigation and .show rules that used to live
+  here have been removed. components/Header.tsx now handles all of that with
+  Tailwind classes and React state.
+
+  They were the source of three bugs worth remembering:
+  - .sticky-header set `height: 80px; line-height: 82px` while the bar itself
+    was h-16 (64px), so the header grew and the text stretched on scroll.
+  - .navigation was a fixed side drawer shown by adding a `.show` class. The
+    class was never removed, so the menu reopened by itself on resize.
+  - `box-shadow: 3px 3px -8px 3px #ddd` was invalid anyway — a blur radius
+    can't be negative, so the browser threw the whole declaration away.
+*/
+
+.swiper-pagination-bullet {
+  background-color: #c80040 !important;
+}
+
+/*
+  Respect the operating system's "reduce motion" setting. Some people get
+  motion sickness from sliding and fading interfaces, and some just prefer it
+  off. This switches every animation to near-instant instead of removing the
+  effect, so nothing ends up stuck half-transparent.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
