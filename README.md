@@ -154,9 +154,13 @@ through the admin form.
 
 ## Known rough edges
 
-Doctor photos are written to `public/uploads/doctors/` on local disk. That works
-in development and breaks on Vercel, whose filesystem is read-only and
-ephemeral — swap in Vercel Blob or Cloudinary before deploying.
+Doctor photos are uploaded to Vercel Blob rather than local disk. An earlier
+version wrote into `public/uploads/doctors/`, which works with `npm run dev` but
+breaks on Vercel, whose filesystem is read-only and wiped between requests — an
+uploaded photo would 404 almost immediately. Blob is used in development too, so
+there's one code path rather than a production path that only runs in production.
+Because `next/image` optimises on the server, the Blob hostname has to be
+whitelisted in `next.config.ts` under `images.remotePatterns`.
 
 Because the root layout reads the session cookie so the header can show who's
 logged in, every route renders per request. That's the right trade for an app
