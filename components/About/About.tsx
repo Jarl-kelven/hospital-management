@@ -27,16 +27,10 @@ export default function About() {
         </h1>
 
         <p className="mt-5 text-gray-800 text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia ab voluptas, quia alias
-          itaque sed exercitationem, ipsa dolores sapiente magni eaque et incidunt amet eveniet
-          maiores repudiandae earum tempora dicta aliquid dolorum voluptate vitae, similique ipsam!
-          Optio officiis sequi quisquam error vero veritatis ab vitae nisi id quis. Praesentium
-          provident unde cumque temporibus expedita cum reiciendis dolore tempora, fuga porro.
+          For over a decade, HealthNet has combined compassionate care with modern medicine. Our team of board-certified physicians and specialists work across more than a dozen departments, from emergency care to long-term treatment plans, all guided by one principle: every patient deserves care that&apos;s fast, thorough, and personal.
           <br />
           <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quod magnam aut autem sint,
-          explicabo corporis! Corporis nostrum nemo odit eligendi. Corrupti atque laudantium,
-          praesentium porro mollitia aliquam eius tempore.
+          We&apos;ve invested in the tools that make healthcare easier to access — online scheduling, virtual consultations, and digital records you can reach anytime. Whether you&apos;re coming in for a routine checkup or managing a complex condition, our staff is here to make the process as smooth as possible.
         </p>
 
         

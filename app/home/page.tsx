@@ -25,7 +25,7 @@ export default function HomePage() {
             of healthcare efficiency and patient-centric care with our advanced platform
           </p>
 
-          <div className="md:text-start">
+          <div className="text-center md:text-start">
             {/* In Next.js, navigation should use <Link href="..."> */}
             <Link href="/doctors">
               <button className="btn md:text-base text-xs p-3" type="button">

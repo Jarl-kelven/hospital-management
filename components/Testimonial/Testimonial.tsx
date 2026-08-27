@@ -25,23 +25,23 @@ const testimonials: TestimonialItem[] = [
     message:
       "Their medical services are top notch. They are the best amongst the rest. They are dependable",
     rating: 5,
-    avatar: "/images/hero-img02.png",
+    avatar: "/images/review-img1.jpg",
   },
   {
     id: "t2",
-    name: "Joshua Eze",
+    name: "Amara Chike",
     message:
-      "Their medical services are top notch. They are the best amongst the rest. They are dependable",
+      "From the front desk to the doctors, everyone treated me with real care. I never felt like just another appointment.",
     rating: 5,
-    avatar: "/images/hero-img02.png",
+    avatar: "/images/review-img2.jpg",
   },
   {
     id: "t3",
-    name: "Joshua Eze",
+    name: "Jason Abiola",
     message:
-      "Their medical services are top notch. They are the best amongst the rest. They are dependable",
+      "Booking through the app saved me so much time. I got matched with a great cardiologist and didn't have to wait weeks for an appointment.",
     rating: 5,
-    avatar: "/images/hero-img02.png",
+    avatar: "/images/review-img3.jpg",
   },
 ];
 

@@ -47,21 +47,10 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
           </div>
 
           <Link href={`/doctors/${id}`} className="w-[44px] h-[44px] flex items-start justify-end" aria-label="View doctor">
-            <span className="share-icon-pink">
-              <ShareIcon />
-            </span>
+            
           </Link>
         </div>
       </article>
     </section>
-  );
-}
-
-/** Inline share icon (no extra libraries) */
-function ShareIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 1 0 14 5a3 3 0 0 0 .05.52L7.03 9.63a3 3 0 1 0 0 4.74l7.02 4.11A3 3 0 1 0 18 16.08Z" />
-    </svg>
   );
 }

@@ -11,30 +11,30 @@ export const faqs: Faq[] = [
     id: "faq-1",
     question: "What is your medical care?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "We offer comprehensive care across specialties including cardiology, neurology, dermatology, mental health, and general surgery, all under one roof.",
   },
   {
     id: "faq-2",
     question: "What happens if I need to go a hospital?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Our emergency department is open 24/7, and our triage team will get you seen based on the urgency of your condition.",
   },
   {
     id: "faq-3",
-    question: "What happens if I need to go a hospital?",
+    question: "How do I book a follow up appointment?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "You can schedule directly through your patient dashboard or call our scheduling line, and we'll match you with your preferred doctor.",
   },
   {
     id: "faq-4",
     question: "Can I visit your medical office?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Yes, walk-ins are welcome for general consultations, though booking ahead helps reduce your wait time.",
   },
   {
     id: "faq-5",
     question: "Does you provide urgent care?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Yes, our urgent care unit handles non-life-threatening conditions like minor injuries, infections, and same-day illness visits without needing an ER visit.",
   },
 ];

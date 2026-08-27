@@ -1,48 +1,85 @@
 // components/Services/ServiceCard.tsx
 import type { ServiceItem } from "../../data/services";
+import {
+  Ribbon,
+  Baby,
+  Heart,
+  HeartPulse,
+  Brain,
+  Activity,
+  Shield,
+  Flame,
+  Stethoscope,
+} from "lucide-react";
 
 type ServiceCardProps = {
   item: ServiceItem;
   index: number;
 };
 
-/**
- * Inline share icon (no react-icons dependency).
- * Keeps the exact same styling you had.
- */
-function ShareIcon(props: React.SVGProps<SVGSVGElement>) {
+type IconProps = {
+  size?: number;
+  className?: string;
+};
+
+function LaborDeliveryIcon({ size = 18, className }: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      fill="currentColor"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 1 0 14 5a3 3 0 0 0 .05.52L7.03 9.63a3 3 0 1 0 0 4.74l7.02 4.11A3 3 0 1 0 18 16.08Z" />
-    </svg>
+    <span className={`relative inline-block align-middle ${className ?? ""}`} style={{ width: size, height: size }}>
+      <Baby aria-hidden="true" size={size} />
+      <Heart
+        aria-hidden="true"
+        size={Math.round(size * 0.55)}
+        className="absolute -right-1 -bottom-1"
+        fill="currentColor"
+      />
+    </span>
   );
 }
 
-export default function ServiceCard({ item, index }: ServiceCardProps) {
+function NeurologyIcon({ size = 18, className }: IconProps) {
+  return (
+    <span className={`relative inline-block align-middle ${className ?? ""}`} style={{ width: size, height: size }}>
+      <Brain aria-hidden="true" size={size} />
+      <Activity aria-hidden="true" size={Math.round(size * 0.75)} className="absolute inset-0 m-auto" />
+    </span>
+  );
+}
+
+function BurnTreatmentIcon({ size = 18, className }: IconProps) {
+  return (
+    <span className={`relative inline-block align-middle ${className ?? ""}`} style={{ width: size, height: size }}>
+      <Shield aria-hidden="true" size={size} />
+      <Flame aria-hidden="true" size={Math.round(size * 0.7)} className="absolute inset-0 m-auto" />
+    </span>
+  );
+}
+
+const ICONS_BY_SERVICE: Record<string, React.ComponentType<IconProps>> = {
+  "Cancer Care": (p) => <Ribbon aria-hidden="true" size={p.size ?? 18} className={p.className} />,
+  "Labor & Delivery": LaborDeliveryIcon,
+  "Heart & Vascular": (p) => <HeartPulse aria-hidden="true" size={p.size ?? 18} className={p.className} />,
+  "Mental Health": (p) => <Brain aria-hidden="true" size={p.size ?? 18} className={p.className} />,
+  Neurology: NeurologyIcon,
+  "Burn Treatment": BurnTreatmentIcon,
+};
+
+export default function ServiceCard({ item, index: _index }: ServiceCardProps) {
   const { name, desc } = item;
+  const Icon = ICONS_BY_SERVICE[name] ?? ((p: IconProps) => (
+    <Stethoscope aria-hidden="true" size={p.size ?? 18} className={p.className} />
+  ));
 
   return (
     <section className="text-center gap-1 mt-10 px-14 sm:px-40 md:px-52 lg:px-14">
+
+      <span className="mt-4 w-[44px] h-[44px] mx-auto flex items-center justify-center">
+        <span className="text-center">
+          <Icon size={18} />
+        </span>
+      </span>
       <h2 className="text-xl font-bold text-gray-800">{name}</h2>
       <p className="text-xs mt-1">{desc}</p>
 
-      {/* 
-        Original code had a <Link> with no destination.
-        I replaced it with a span to avoid an invalid href.
-        If you later add a detail page, wrap this span with <Link href={`/services/${name}`}>.
-      */}
-      <span className="mt-4 w-[44px] h-[44px] mx-auto flex items-center justify-center">
-        <span className="share-icon text-center">
-          <ShareIcon />
-        </span>
-      </span>
     </section>
   );
 }
