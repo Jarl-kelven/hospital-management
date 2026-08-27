@@ -109,7 +109,7 @@ export default function HomePage() {
           </ol>
 
           {/* Your old code had <Link> with no "to". In Next we must provide href. */}
-          <Link href="/services" className="md:text-center inline-block">
+          <Link href="/services" className="md:text-center sm:text-center inline-block">
             <button className="btn" type="button">
               Learn More
             </button>
