@@ -9,7 +9,7 @@ import Link from "next/link";
  */
 export default function About() {
   return (
-    <section className="container sm:w-[65%] md:w-[70%] flex flex-col items-center justify-center gap-1 mt-40 xl:flex-row">
+    <section className="container sm:w-[65%] md:w-[70%] xl:w-[90%] flex flex-col items-center justify-center gap-1 mt-40 xl:flex-row">
       <article className="xl:basis-[50%]">
         <Image
           className="rounded-md xl:w-[80%]"

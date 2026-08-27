@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <main>
       {/* HERO SECTION */}
-      <section className="container sm:w-[70%] text-center flex flex-col lg:flex-row items-center justify-between gap-8">
+      <section className="container sm:w-[70%] xl:w-[90%] text-center flex flex-col lg:flex-row items-center justify-between gap-8">
         <article className="flex flex-col basis-3/6">
           <h1 className="text-3xl md:text-start sm:text-5xl font-bold text-gray-800">
             Elevating Wellness Together: Your Supportive Hospital Companion.
