@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <main>
       {/* HERO SECTION */}
-      <section className="container text-center flex flex-col lg:flex-row items-center justify-between gap-8">
+      <section className="container sm:w-[70%] text-center flex flex-col lg:flex-row items-center justify-between gap-8">
         <article className="flex flex-col basis-3/6">
           <h1 className="text-3xl md:text-start sm:text-5xl font-bold text-gray-800">
             Elevating Wellness Together: Your Supportive Hospital Companion.
@@ -93,8 +93,8 @@ export default function HomePage() {
       <ServiceList />
 
       {/* VIRTUAL TREATMENTS */}
-      <section className="container lg:flex lg:items-center justify-between gap-2">
-        <article className="lg:order-2 basis-[50%]">
+      <section className="container sm:items-center lg:flex lg:justify-center lg:items-center justify-between gap-2">
+        <article className="lg:order-2 basis-[50%] sm:text-center lg:text-start">
           <h1 className="heading-1 mt-24 mb-3 lg:flex lg:order-1 lg:mt-3">
             Get virtual treatments anytime.
           </h1>
@@ -109,20 +109,20 @@ export default function HomePage() {
           </ol>
 
           {/* Your old code had <Link> with no "to". In Next we must provide href. */}
-          <Link href="/services" className="md:text-center sm:text-center inline-block">
+          <Link href="/services" className=" w-full flex lg:justify-start justify-center">
             <button className="btn" type="button">
               Learn More
             </button>
           </Link>
         </article>
 
-        <div className="lg:order-1 basis-[40%]">
+        <div className="w-full flex justify-center lg:order-1 basis-[50%]">
           <Image
-            className="rounded-lg hidden sm:block lg:w-[95%]"
+            className="rounded-lg hidden sm:block lg:w-[85%]"
             src="/images/virtual.png"
             alt="Virtual treatment illustration"
-            width={520}
-            height={420}
+            width={420}
+            height={320}
           />
         </div>
       </section>

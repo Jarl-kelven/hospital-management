@@ -9,14 +9,14 @@ import Link from "next/link";
  */
 export default function About() {
   return (
-    <section className="container flex flex-col items-center justify-center gap-1 mt-40 xl:flex-row">
+    <section className="container sm:w-[65%] md:w-[70%] flex flex-col items-center justify-center gap-1 mt-40 xl:flex-row">
       <article className="xl:basis-[50%]">
         <Image
           className="rounded-md xl:w-[80%]"
           src="/images/doc-about.png"
           alt="About our hospital"
-          width={900}
-          height={700}
+          width={700}
+          height={500}
           sizes="(max-width: 1280px) 90vw, 40vw"
         />
       </article>
