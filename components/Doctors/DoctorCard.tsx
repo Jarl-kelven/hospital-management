@@ -15,7 +15,7 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
 
   return (
     <section className="mx-auto w-11/12 my-14 px-5">
-      <article className="max-w-[80%] mx-auto lg:px-0 lg:w-52.5 sm:w-106.75">
+      <article className="max-w-[80%] mx-auto lg:px-0 lg:w-52.5 sm:w-100.75">
         <Image
           className="text-center rounded-md lg:h-[200px] lg:w-[210px]"
           src={photoUrl}
