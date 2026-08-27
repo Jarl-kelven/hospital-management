@@ -1,6 +1,6 @@
 // app/admin/layout.tsx
-import Link from "next/link";
 import type { ReactNode } from "react";
+import DashboardNav, { type NavLink } from "@/components/DashboardNav";
 import { requireAdmin } from "@/lib/auth";
 
 /**
@@ -16,8 +16,12 @@ import { requireAdmin } from "@/lib/auth";
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const admin = await requireAdmin();
 
-  const links = [
-    { href: "/admin", label: "Overview" },
+  /*
+    `exact` on Overview only. Every admin URL starts with "/admin", so without it
+    Overview would look active on the Doctors page too — see DashboardNav.
+  */
+  const links: NavLink[] = [
+    { href: "/admin", label: "Overview", exact: true },
     { href: "/admin/users", label: "Users" },
     { href: "/admin/doctors", label: "Doctors" },
     { href: "/admin/appointments", label: "Appointments" },
@@ -43,17 +47,12 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           <p className="text-xs text-gray-600">Signed in as {admin.email}</p>
         </div>
 
-        <nav className="mx-auto mt-4 flex w-11/12 gap-6 overflow-x-auto pb-3 text-sm">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap font-semibold text-gray-700 hover:text-primaryColor"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/*
+          The tabs live in their own Client Component because highlighting the
+          current one needs usePathname(), which is browser-only. This layout
+          stays a Server Component so requireAdmin() above still runs first.
+        */}
+        <DashboardNav links={links} />
       </div>
 
       <main className="mx-auto w-11/12 py-8">{children}</main>

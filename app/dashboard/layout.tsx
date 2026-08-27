@@ -1,6 +1,6 @@
 // app/dashboard/layout.tsx
-import Link from "next/link";
 import type { ReactNode } from "react";
+import DashboardNav, { type NavLink } from "@/components/DashboardNav";
 import { requireUser } from "@/lib/auth";
 
 /**
@@ -14,8 +14,12 @@ import { requireUser } from "@/lib/auth";
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const user = await requireUser();
 
-  const links = [
-    { href: "/dashboard", label: "My details" },
+  /*
+    `exact` on "My details" only, because "/dashboard" is the start of every URL
+    in here — without it, it would stay highlighted on Edit profile as well.
+  */
+  const links: NavLink[] = [
+    { href: "/dashboard", label: "My details", exact: true },
     { href: "/dashboard/profile", label: "Edit profile" },
     { href: "/dashboard/appointments", label: "Appointments" },
     { href: "/doctors", label: "Find a doctor" },
@@ -32,17 +36,12 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           <p className="text-xs text-gray-600">{user.email}</p>
         </div>
 
-        <nav className="mx-auto mt-4 flex w-11/12 gap-6 overflow-x-auto pb-3 text-sm">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap font-semibold text-gray-700 hover:text-primaryColor"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/*
+          Same tab bar the admin area uses — one Client Component, two dashboards.
+          It's a Client Component so it can read the current path; this layout
+          stays on the server, where requireUser() belongs.
+        */}
+        <DashboardNav links={links} />
       </div>
 
       <main className="mx-auto w-11/12 py-8">{children}</main>
