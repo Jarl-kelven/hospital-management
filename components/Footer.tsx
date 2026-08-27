@@ -194,7 +194,7 @@ export default function Footer() {
         </ul>
 
         <p className="mt-8 border-t border-white/10 pt-6 text-center text-xs text-gray-400">
-          © {year} HealthNet. Built as a learning project.
+          © {year} HealthNet.
         </p>
       </div>
     </footer>

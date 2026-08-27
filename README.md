@@ -1,5 +1,5 @@
-# HealthNet
-
+# HealthNet  
+Live link: https://hospital-management-sigma-murex.vercel.app/
 A hospital management app: patients book appointments and keep their medical
 details in one place, and an admin runs the clinic — staff, appointments and
 enquiries — from a dashboard.
@@ -152,23 +152,7 @@ forms also carry a hidden honeypot field that real people never fill in.
 in the database with the same shape, seeded by `prisma/seed.mjs` and added
 through the admin form.
 
-## Known rough edges
 
-Doctor photos are uploaded to Vercel Blob rather than local disk. An earlier
-version wrote into `public/uploads/doctors/`, which works with `npm run dev` but
-breaks on Vercel, whose filesystem is read-only and wiped between requests — an
-uploaded photo would 404 almost immediately. Blob is used in development too, so
-there's one code path rather than a production path that only runs in production.
-Because `next/image` optimises on the server, the Blob hostname has to be
-whitelisted in `next.config.ts` under `images.remotePatterns`.
-
-Because the root layout reads the session cookie so the header can show who's
-logged in, every route renders per request. That's the right trade for an app
-whose header changes by viewer, but it does mean the marketing pages are no
-longer statically prerendered.
-
-`zod` is listed in `package.json` but unused — the codebase validates by hand.
-It's safe to uninstall.
 
 ## Roadmap
 
